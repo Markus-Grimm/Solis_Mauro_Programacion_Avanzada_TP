@@ -20,6 +20,15 @@ public class VolumeManager : MonoBehaviour
 
         Volume = GameObject.Find("Volume");
         slider = Volume.gameObject.GetComponent<Slider>();
+                        
+        if (PlayerPrefs.HasKey("VolumeAudio")) slider.value = PlayerPrefs.GetFloat("VolumeAudio");
+        else slider.value = 0;
+
+        if (PlayerPrefs.HasKey("MuteAudio"))
+        {
+            if (PlayerPrefs.GetInt("MuteAudio") == 0) toggle.isOn = false;
+            else toggle.isOn = true;
+        } else toggle.isOn = false;
     }
 
     public void MuteAudio()
