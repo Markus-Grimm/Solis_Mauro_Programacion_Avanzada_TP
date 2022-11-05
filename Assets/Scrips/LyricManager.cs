@@ -74,9 +74,8 @@ public class LyricManager : MonoBehaviour
         lyricList2 = lyricList;
     }
 
-
     void Start()
-    {
+    {                
         currVal = 0;
         audioSource.Play();
         Main();
@@ -87,9 +86,9 @@ public class LyricManager : MonoBehaviour
     {
         if (currVal < 40)
         {
-            if (lyricList2[currVal].timeStamp <= Time.fixedTime)
+            if (lyricList2[currVal].timeStamp <= audioSource.time)
             {
-                if (lyricList2[currVal].nextLyric > Time.fixedTime)
+                if (lyricList2[currVal].nextLyric > audioSource.time)
                 {
                     if (lyric_txt.text != lyricList2[currVal].lyric) lyric_txt.text = lyricList2[currVal].lyric;
                     if (lyricCoro_txt.text != lyricList2[currVal].lyricCoro) lyricCoro_txt.text = lyricList2[currVal].lyricCoro;
@@ -105,7 +104,21 @@ public class LyricManager : MonoBehaviour
     }
 
     void Update()
-    {        
-            time_txt.text = Time.fixedTime.ToString();
+    {
+        if (!audioSource.loop && audioSource.time < 176f)
+        {
+            time_txt.text = audioSource.time.ToString();
+        }
+        else
+        {
+            time_txt.text = " ";
+        }
+
+        time_txt.text = audioSource.time.ToString();
+    }
+
+    public void SaveTime()
+    {
+        PlayerPrefs.SetFloat("TimeSong", audioSource.time);
     }
 }

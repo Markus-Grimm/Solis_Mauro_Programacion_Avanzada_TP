@@ -7,16 +7,24 @@ public class VolumeManager : MonoBehaviour
 {
     //Mute
     GameObject Mute;
-    Toggle toggle;
+    Toggle toggleMute;
+
+    //Mute
+    GameObject Reset;
+    Toggle toggleReset;
 
     //Volume
     GameObject Volume;
     Slider slider;
 
     void Start()
-    {                
+    {
+        //PlayerPrefs.DeleteAll();
         Mute = GameObject.Find("Mute");
-        toggle = Mute.gameObject.GetComponent<Toggle>();
+        toggleMute = Mute.gameObject.GetComponent<Toggle>();
+
+        Reset = GameObject.Find("Reset");
+        toggleReset = Reset.gameObject.GetComponent<Toggle>();
 
         Volume = GameObject.Find("Volume");
         slider = Volume.gameObject.GetComponent<Slider>();
@@ -26,14 +34,26 @@ public class VolumeManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("MuteAudio"))
         {
-            if (PlayerPrefs.GetInt("MuteAudio") == 0) toggle.isOn = false;
-            else toggle.isOn = true;
-        } else toggle.isOn = false;
+            if (PlayerPrefs.GetInt("MuteAudio") == 0) toggleMute.isOn = false;
+            else toggleMute.isOn = true;
+        } else toggleMute.isOn = false;
+
+        if (PlayerPrefs.HasKey("ResetAudio"))
+        {
+            if (PlayerPrefs.GetInt("ResetAudio") == 0) toggleReset.isOn = false;
+            else toggleReset.isOn = true;
+        }
+        else toggleReset.isOn = false;
     }
 
     public void MuteAudio()
     {
-        PlayerPrefs.SetInt("MuteAudio", (toggle.isOn ? 1 : 0));
+        PlayerPrefs.SetInt("MuteAudio", (toggleMute.isOn ? 1 : 0));
+    }
+
+    public void ResetAudio()
+    {
+        PlayerPrefs.SetInt("ResetAudio", (toggleReset.isOn ? 1 : 0));
     }
 
     public void VolumeAudio()

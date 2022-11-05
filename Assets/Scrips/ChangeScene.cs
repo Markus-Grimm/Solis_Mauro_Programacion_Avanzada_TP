@@ -11,8 +11,7 @@ public class ChangeScene : MonoBehaviour
     }
 
     public void ReturnButton()
-    {
+    {                
         SceneManager.LoadScene("MainMenu");
-        Debug.Log("a");
     }
 }

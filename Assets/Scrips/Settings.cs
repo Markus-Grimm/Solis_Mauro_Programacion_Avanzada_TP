@@ -12,11 +12,19 @@ public class Settings : MonoBehaviour
                 
         if (PlayerPrefs.GetInt("MuteAudio") == 0) audioSource.mute = false;
         else audioSource.mute = true;
+               
 
         audioSource.volume = PlayerPrefs.GetFloat("VolumeAudio");
 
-        Debug.Log(audioSource.mute);
-        Debug.Log(audioSource.volume);
+        if (PlayerPrefs.HasKey("TimeSong"))
+        {
+            if (PlayerPrefs.GetInt("ResetAudio") == 0) audioSource.time = PlayerPrefs.GetFloat("TimeSong");
+            else audioSource.Play();
+        }
+        else
+        {
+            audioSource.time = 0;
+        }
     }
 
 }
