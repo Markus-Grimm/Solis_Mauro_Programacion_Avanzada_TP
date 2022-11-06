@@ -5,21 +5,12 @@ using UnityEngine.UI;
 
 public class VolumeManager : MonoBehaviour
 {
-    //Mute
-    GameObject Mute;
-    Toggle toggleMute;
-
-    //Mute
-    GameObject Reset;
-    Toggle toggleReset;
-
-    //Volume
-    GameObject Volume;
-    Slider slider;
+    public GameObject Mute, Reset, Volume;
+    public Toggle toggleMute, toggleReset;
+    public Slider slider;
 
     void Start()
-    {
-        //PlayerPrefs.DeleteAll();
+    {        
         Mute = GameObject.Find("Mute");
         toggleMute = Mute.gameObject.GetComponent<Toggle>();
 
@@ -28,7 +19,12 @@ public class VolumeManager : MonoBehaviour
 
         Volume = GameObject.Find("Volume");
         slider = Volume.gameObject.GetComponent<Slider>();
-                        
+
+        InitializeKeys();
+    }
+
+    private void InitializeKeys()
+    {
         if (PlayerPrefs.HasKey("VolumeAudio")) slider.value = PlayerPrefs.GetFloat("VolumeAudio");
         else slider.value = 0;
 
@@ -36,7 +32,8 @@ public class VolumeManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("MuteAudio") == 0) toggleMute.isOn = false;
             else toggleMute.isOn = true;
-        } else toggleMute.isOn = false;
+        }
+        else toggleMute.isOn = false;
 
         if (PlayerPrefs.HasKey("ResetAudio"))
         {
@@ -44,6 +41,12 @@ public class VolumeManager : MonoBehaviour
             else toggleReset.isOn = true;
         }
         else toggleReset.isOn = false;
+    }
+
+    public void DeleteKeys()
+    {
+        PlayerPrefs.DeleteAll();
+        InitializeKeys();
     }
 
     public void MuteAudio()
