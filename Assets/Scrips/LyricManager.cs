@@ -74,16 +74,16 @@ public class LyricManager : MonoBehaviour
 
     void Start()
     {                
-        currVal = 0;
+        currVal = 0;        
         audioSource.Play();
         Main();
-        StartCoroutine(Change(0.2f));        
+        StartCoroutine(Change(0.1f));        
     }
 
     IEnumerator Change(float time)
     {
         if (currVal <= 40)
-        {
+        {            
             if (lyricList[currVal].timeStamp <= audioSource.time)
             {
                 if (lyricList[currVal].nextLyric > audioSource.time)
@@ -98,15 +98,17 @@ public class LyricManager : MonoBehaviour
         else currVal = 0;
         
         yield return new WaitForSeconds(time);
-        StartCoroutine(Change(0.2f));
+        StartCoroutine(Change(0.1f));
     }
 
     void Update()
     {
+        
+
         if (!audioSource.loop && audioSource.time < 176f) time_txt.text = audioSource.time.ToString();
         else time_txt.text = " ";
 
-        time_txt.text = audioSource.time.ToString();
+        time_txt.text = Mathf.RoundToInt(audioSource.time).ToString();
     }
 
     public void SaveTime()
