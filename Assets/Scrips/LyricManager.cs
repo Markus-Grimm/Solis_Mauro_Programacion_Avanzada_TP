@@ -38,8 +38,8 @@ public class LyricManager : MonoBehaviour
         initialList.Add(new LyricPortion() { timeStamp = 40.0f, lyric = "ROMA", lyricCoro = "LEGIO! AETERNA! AERTERNA! VICTRIX!", nextLyric = 45f });
         initialList.Add(new LyricPortion() { timeStamp = 45.0f, lyric = "ROMA", lyricCoro = "LEGIO! AETERNA! AERTERNA! VICTRIX!", nextLyric = 50f });
         initialList.Add(new LyricPortion() { timeStamp = 50.0f, lyric = "OH ROMA", lyricCoro = "LEGIO! AETERNA! AERTERNA! VICTRIX!", nextLyric = 55f });
-        initialList.Add(new LyricPortion() { timeStamp = 55.0f, lyric = "ROMA", lyricCoro = "LEGIO! AETERNA! AERTERNA! VICTRIX!", nextLyric = 58f });
-        initialList.Add(new LyricPortion() { timeStamp = 58.0f, lyric = "", lyricCoro = "", nextLyric = 71f });
+        initialList.Add(new LyricPortion() { timeStamp = 55.0f, lyric = "ROMA", lyricCoro = "LEGIO! AETERNA! AERTERNA! VICTRIX!", nextLyric = 59f });
+        initialList.Add(new LyricPortion() { timeStamp = 59.0f, lyric = "", lyricCoro = "", nextLyric = 71f });
         initialList.Add(new LyricPortion() { timeStamp = 71.0f, lyric = "A FERVENTI AESTUOSA LIBYA", lyricCoro = "", nextLyric = 74f });
         initialList.Add(new LyricPortion() { timeStamp = 74.0f, lyric = "", lyricCoro = "A FERVENTI AESTUOSA LIBYA", nextLyric = 76f });
         initialList.Add(new LyricPortion() { timeStamp = 76.0f, lyric = "VOLAT AQUILA LEGIONUM", lyricCoro = "", nextLyric = 78f });
@@ -82,7 +82,7 @@ public class LyricManager : MonoBehaviour
 
     IEnumerator Change(float time)
     {
-        if (currVal <= lyricList.Count)
+        if (currVal <= 40)
         {
             if (lyricList[currVal].timeStamp <= audioSource.time)
             {
