@@ -26,7 +26,7 @@ public class VolumeManager : MonoBehaviour
     private void InitializeKeys()
     {
         if (PlayerPrefs.HasKey("VolumeAudio")) slider.value = PlayerPrefs.GetFloat("VolumeAudio");
-        else slider.value = 0;
+        else slider.value = 1;
 
         if (PlayerPrefs.HasKey("MuteAudio"))
         {
@@ -47,6 +47,16 @@ public class VolumeManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         InitializeKeys();
+    }
+
+    public void DefaultValues()
+    {
+        slider.value = 1;
+        PlayerPrefs.SetFloat("VolumeAudio", slider.value);
+        toggleMute.isOn = false;
+        PlayerPrefs.SetInt("MuteAudio", (toggleMute.isOn ? 1 : 0));
+        toggleReset.isOn = false;
+        PlayerPrefs.SetInt("ResetAudio", (toggleReset.isOn ? 1 : 0));
     }
 
     public void MuteAudio()
