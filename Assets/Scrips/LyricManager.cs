@@ -27,8 +27,8 @@ public class LyricManager : MonoBehaviour
     {
         List<LyricPortion> initialList = new List<LyricPortion>();
 
-        initialList.Add(new LyricPortion() { timeStamp = 20.0f, lyric = "VERTI EST SUA AETERNI", lyricCoro = "", nextLyric = 22.5f });
-        initialList.Add(new LyricPortion() { timeStamp = 22.5f, lyric = "", lyricCoro = "VERTI EST SUA AETERNI", nextLyric = 25.8f });
+        initialList.Add(new LyricPortion() { timeStamp = 20.5f, lyric = "VERTI EST SUA AETERNI", lyricCoro = "", nextLyric = 22.8f });
+        initialList.Add(new LyricPortion() { timeStamp = 22.8f, lyric = "", lyricCoro = "VERTI EST SUA AETERNI", nextLyric = 25.8f });
         initialList.Add(new LyricPortion() { timeStamp = 25.8f, lyric = "CORDA NOSTRA SOLUM TIBI", lyricCoro = "", nextLyric = 28f });
         initialList.Add(new LyricPortion() { timeStamp = 28.0f, lyric = "", lyricCoro = "CORDA NOSTRA SOLUM TIBI", nextLyric = 30f });
         initialList.Add(new LyricPortion() { timeStamp = 30.0f, lyric = "VERTI EST SUA AETERNI", lyricCoro = "", nextLyric = 33f });
@@ -77,21 +77,18 @@ public class LyricManager : MonoBehaviour
         currVal = 0;        
         audioSource.Play();
         Main();
-        StartCoroutine(Change(0.1f));        
+        StartCoroutine(Change(0.1f));
     }
 
     IEnumerator Change(float time)
     {
-        if (currVal <= 40)
+        
+        if (currVal < lyricList.Count)
         {            
-            if (lyricList[currVal].timeStamp <= audioSource.time)
-            {
-                if (lyricList[currVal].nextLyric > audioSource.time)
-                {
+            if (lyricList[currVal].timeStamp <= audioSource.time && lyricList[currVal].nextLyric > audioSource.time)
+            {                
                     if (lyric_txt.text != lyricList[currVal].lyric) lyric_txt.text = lyricList[currVal].lyric;
-                    if (lyricCoro_txt.text != lyricList[currVal].lyricCoro) lyricCoro_txt.text = lyricList[currVal].lyricCoro;
-                }
-                else currVal++;                
+                    if (lyricCoro_txt.text != lyricList[currVal].lyricCoro) lyricCoro_txt.text = lyricList[currVal].lyricCoro;                            
             }
             else currVal++;
         }
@@ -104,10 +101,6 @@ public class LyricManager : MonoBehaviour
     void Update()
     {
         
-
-        if (!audioSource.loop && audioSource.time < 176f) time_txt.text = audioSource.time.ToString();
-        else time_txt.text = " ";
-
         time_txt.text = Mathf.RoundToInt(audioSource.time).ToString();
     }
 

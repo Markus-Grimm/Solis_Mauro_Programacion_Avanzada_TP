@@ -16,8 +16,11 @@ public class Settings : MonoBehaviour
         audioSource.volume = PlayerPrefs.GetFloat("VolumeAudio");
 
         if (PlayerPrefs.HasKey("TimeSong") && PlayerPrefs.GetInt("ResetAudio") == 0) audioSource.time = PlayerPrefs.GetFloat("TimeSong");
-        else audioSource.Play();
-        
+        else
+        {
+            audioSource.Play();
+            PlayerPrefs.SetInt("ResetAudio", 0);
+        }
     }
 
 }
